@@ -92,8 +92,8 @@ export interface OtherData extends BaseData {
  * These Basequeryoptions are always necessary for a query, they are extended by SingleQueryOptions and MultipleQueryOptions.
  */
 export interface BaseQueryOptions {
-  startDate: string;
-  endDate: string;
+  startDate?: string;
+  endDate?: string;
   limit: number;
 }
 

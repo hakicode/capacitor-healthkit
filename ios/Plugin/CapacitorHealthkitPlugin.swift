@@ -532,6 +532,7 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
         guard let _sampleName = call.options["sampleName"] as? String else {
             return call.reject("Must provide sampleName")
         }
+        /*
         guard let startDateString = call.options["startDate"] as? String else {
             return call.reject("Must provide startDate")
         }
@@ -541,8 +542,19 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
 
         let _startDate = getDateFromString(inputDate: startDateString)
         let _endDate = getDateFromString(inputDate: endDateString)
+        */
         guard let _limit = call.options["limit"] as? Int else {
             return call.reject("Must provide limit")
+        }
+
+        var _startDate: Date? = nil
+        var _endDate: Date? = nil
+
+        if let startDateString = call.options["startDate"] as? String {
+            _startDate = getDateFromString(inputDate: startDateString)
+        }
+        if let endDateString = call.options["endDate"] as? String {
+            _endDate = getDateFromString(inputDate: endDateString)
         }
 
         let limit: Int = (_limit == 0) ? HKObjectQueryNoLimit : _limit
@@ -608,10 +620,12 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
     }
 
     @objc func multipleQueryHKitSampleType(_ call: CAPPluginCall) {
+        
         guard let _sampleNames = call.options["sampleNames"] as? [String] else {
             call.reject("Must provide sampleNames")
             return
         }
+        /*
         guard let _startDate = call.options["startDate"] as? Date else {
             call.reject("Must provide startDate")
             return
@@ -620,9 +634,20 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
             call.reject("Must provide endDate")
             return
         }
+        */
         guard let _limit = call.options["limit"] as? Int else {
             call.reject("Must provide limit")
             return
+        }
+
+        var _startDate: Date? = nil
+        var _endDate: Date? = nil
+
+        if let startDateString = call.options["startDate"] as? String {
+            _startDate = getDateFromString(inputDate: startDateString)
+        }
+        if let endDateString = call.options["endDate"] as? String {
+            _endDate = getDateFromString(inputDate: endDateString)
         }
 
         let limit: Int = (_limit == 0) ? HKObjectQueryNoLimit : _limit
@@ -657,15 +682,18 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
             call.resolve(output)
         }
     }
-      
-    func queryHKitSampleTypeSpecial(sampleName: String, startDate: Date, endDate: Date, limit: Int, completion: @escaping (Result<[String: Any], Error>) -> Void) {
+    
+    //func queryHKitSampleTypeSpecial(sampleName: String, startDate: Date, endDate: Date, limit: Int, completion: @escaping (Result<[String: Any], Error>) -> Void) {
+    func queryHKitSampleTypeSpecial(sampleName: String, startDate: Date?, endDate: Date?, limit: Int, completion: @escaping (Result<[String: Any], Error>) -> Void) {
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: HKQueryOptions.strictStartDate)
-
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
         guard let sampleType: HKSampleType = getSampleType(sampleName: sampleName) else {
             return completion(.failure(HKSampleError.sampleTypeFailed))
         }
 
-        let query = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: limit, sortDescriptors: nil) {
+        //let query = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: limit, sortDescriptors: nil) {
+        let query = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: limit, sortDescriptors: [sortDescriptor]) {
             _, results, _ in
             guard let output: [[String: Any]] = self.generateOutput(sampleName: sampleName, results: results) else {
                 return completion(.failure(HKSampleError.sampleTypeFailed))
