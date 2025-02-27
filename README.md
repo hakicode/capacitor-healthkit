@@ -273,6 +273,35 @@ This is used for checking writing permissions.
 * Theo Creach (original author) - [Twitter](https://twitter.com/crcht)
 * Timothée Bilodeau - [Linkedin](https://www.linkedin.com/in/timoth%E9e-bilodeau-03080ab2/)
 
+HealthKit - Apple Health Data
+
+| Case | Mô tả |
+|------|-------|
+| **"steps"** | Số bước đi (Step Count) |
+| **"stairs"** | Số bậc cầu thang đã leo (Flights Climbed) |
+| **"duration"** | Thời gian tập luyện (Exercise Time - Apple Exercise Time) |
+| **"activity"** | Dữ liệu hoạt động, bao gồm phân tích giấc ngủ (Sleep Analysis) và bài tập thể thao (Workout Type) |
+| **"calories"** | Năng lượng tiêu hao, bao gồm năng lượng hoạt động (Active Energy Burned) và năng lượng trao đổi chất cơ bản (Basal Energy Burned) |
+| **"distance"** | Khoảng cách di chuyển, gồm khoảng cách đi bộ/chạy (Distance Walking Running) và khoảng cách đạp xe (Distance Cycling) |
+| **"bloodGlucose"** | Lượng đường trong máu (Blood Glucose) |
+| **"weight"** | Cân nặng (Body Mass) |
+| **"heartRate"** | Nhịp tim (Heart Rate) |
+| **"restingHeartRate"** | Nhịp tim lúc nghỉ ngơi (Resting Heart Rate) |
+| **"respiratoryRate"** | Tốc độ hô hấp (Respiratory Rate) |
+| **"bodyFat"** | Phần trăm mỡ cơ thể (Body Fat Percentage) |
+| **"oxygenSaturation"** | Mức oxy trong máu (Oxygen Saturation - SpO2) |
+| **"basalBodyTemperature"** | Nhiệt độ cơ thể cơ bản (Basal Body Temperature) |
+| **"bodyTemperature"** | Nhiệt độ cơ thể (Body Temperature) |
+| **"bloodPressureSystolic"** | Huyết áp tâm thu (Blood Pressure Systolic) |
+| **"bloodPressureDiastolic"** | Huyết áp tâm trương (Blood Pressure Diastolic) |
+
+---
+
+### **Giải thích thêm**
+- **Dữ liệu vận động:** `steps`, `stairs`, `duration`, `activity`, `calories`, `distance` → Theo dõi hoạt động thể chất.
+- **Dữ liệu sức khỏe:** `bloodGlucose`, `weight`, `heartRate`, `restingHeartRate`, `respiratoryRate`, `bodyFat`, `oxygenSaturation`, `basalBodyTemperature`, `bodyTemperature`, `bloodPressureSystolic`, `bloodPressureDiastolic` → Các chỉ số y tế quan trọng.
+
+
 ## License
 
 This project is licensed under the MIT License
