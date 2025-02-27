@@ -1,5 +1,5 @@
 {
-  "name": "@hakicode/capacitor-healthkit",
+  "name": "@perfood/capacitor-healthkit",
   "version": "1.6.0",
   "description": "Capacitor plugin to read data from and write data to Apple Health",
   "main": "dist/plugin.cjs.js",
