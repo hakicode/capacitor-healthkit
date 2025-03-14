@@ -9,7 +9,7 @@ export interface CapacitorHealthkitPlugin {
    * This defines a query to the Healthkit for a single type of data.
    * @param queryOptions defines the type of data and the timeframe which shall be queried, a limit can be set to reduce the number of results.
    */
-  queryHKitSampleType<T>(queryOptions:SingleQueryOptions): Promise<QueryOutput<T>>;
+  queryHKitSampleType<T>(queryOptions: SingleQueryOptions): Promise<QueryOutput<T>>;
   /**
    * This functions resolves if HealthKitData is available it uses the native HKHealthStore.isHealthDataAvailable() funtion of the HealthKit .
    */
@@ -18,7 +18,7 @@ export interface CapacitorHealthkitPlugin {
    * This defines a query to the Healthkit for a single type of data. This function has not been tested.
    * @param queryOptions defines the sample types which can be queried for
    */
-  multipleQueryHKitSampleType(queryOptions:MultipleQueryOptions): Promise<any>;
+  multipleQueryHKitSampleType(queryOptions: MultipleQueryOptions): Promise<any>;
   /**
    * Checks if there is writing permission for one specific sample type. This function has not been tested.
    * @param queryOptions defines the sampletype for which you need to check for writing permission.
@@ -63,13 +63,13 @@ export interface BaseData {
 /**
  * These data points are specific for sleep data.
  */
-export interface SleepData extends BaseData  {
+export interface SleepData extends BaseData {
   sleepState: string;
   timeZone: string;
 }
 
 /**
- * These data points are specific for activities - not every activity automatically has a corresponding entry. 
+ * These data points are specific for activities - not every activity automatically has a corresponding entry.
  */
 export interface ActivityData extends BaseData {
   totalFlightsClimbed: number;
@@ -84,8 +84,9 @@ export interface ActivityData extends BaseData {
  * These datapoints are used in the plugin for ACTIVE_ENERGY_BURNED and STEP_COUNT.
  */
 export interface OtherData extends BaseData {
-  unitName: string;
   value: number;
+  unit: string;
+  unitName: string;
 }
 
 /**
@@ -111,7 +112,6 @@ export interface MultipleQueryOptions extends BaseQueryOptions {
   sampleNames: string[];
 }
 
-
 /**
  * Used for authorization of reading and writing access.
  */
@@ -121,7 +121,6 @@ export interface AuthorizationQueryOptions {
   all: string[];
 }
 
-
 /**
  * This is used for checking writing permissions.
  */
@@ -129,14 +128,12 @@ export interface EditionQuery {
   sampleName: string;
 }
 
-
 /**
  * This is used for checking writing permissions.
  */
 export interface MultipleEditionQuery {
   sampleNames: string[];
 }
-
 
 /**
  * These Sample names define the possible query options.
@@ -161,5 +158,5 @@ export enum SampleNames {
   BASAL_BODY_TEMPERATURE = 'basalBodyTemperature',
   BODY_TEMPERATURE = 'bodyTemperature',
   BLOOD_PRESSURE_SYSTOLIC = 'bloodPressureSystolic',
-  BLOOD_PRESSURE_DIASTOLIC = 'bloodPressureDiastolic'
+  BLOOD_PRESSURE_DIASTOLIC = 'bloodPressureDiastolic',
 }

@@ -404,53 +404,69 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
                     return nil
                 }
                 var unit: HKUnit?
+                var unitCode: String?
                 var unitName: String?
 
                 if sampleName == "heartRate" {
                     unit = HKUnit(from: "count/min")
-                    unitName = "BPM"
+                    unitCode = "bpm"
+                    unitName = "beats per minute"
                 } else if sampleName == "restingHeartRate" {
                     unit = HKUnit(from: "count/min")
-                    unitName = "BPM"
+                    unitCode = "bpm"
+                    unitName = "beats per minute"
                 } else if sampleName == "weight" {
                     unit = HKUnit.gramUnit(with: .kilo)
+                    unitCode = "kg"
                     unitName = "kilogram"
                 } else if sampleName == "respiratoryRate" {
                     unit = HKUnit(from: "count/min")
-                    unitName = "BrPM"
+                    unitCode = "brpm"
+                    unitName = "beats per minute"
                 } else if sampleName == "bodyFat" {
                     unit = HKUnit.percent()
+                    unitCode = "%"
                     unitName = "percent"
                 } else if sampleName == "oxygenSaturation" {
                     unit = HKUnit.percent()
+                    unitCode = "%"
                     unitName = "percent"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.meter()) {
                     unit = HKUnit.meter()
+                    unitCode = "m"
                     unitName = "meter"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.count()) {
                     unit = HKUnit.count()
+                    unitCode = "count"
                     unitName = "count"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.minute()) {
                     unit = HKUnit.minute()
+                    unitCode = "min"
                     unitName = "minute"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.kilocalorie()) {
                     unit = HKUnit.kilocalorie()
+                    unitCode = "kcal"
                     unitName = "kilocalorie"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.moleUnit(withMolarMass: HKUnitMolarMassBloodGlucose).unitDivided(by: HKUnit.literUnit(with: .kilo))) {
                     unit = HKUnit.moleUnit(withMolarMass: HKUnitMolarMassBloodGlucose).unitDivided(by: HKUnit.literUnit(with: .kilo))
-                    unitName = "mmol/L"
+                    unitCode = "mmol/L"
+                    unitName = "millimoles per liter"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.degreeCelsius()) {
                     unit = HKUnit.degreeCelsius()
+                    unitCode = "°C"
                     unitName = "celsius"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.degreeFahrenheit()) {
                     unit = HKUnit.degreeFahrenheit()
+                    unitCode = "°F"
                     unitName = "fahrenheit"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.kelvin()) {
                     unit = HKUnit.kelvin()
+                    unitCode = "K"
                     unitName = "kelvin"
                 } else if sample.quantityType.is(compatibleWith: HKUnit.millimeterOfMercury()) {
                     unit = HKUnit.millimeterOfMercury()
-                    unitName = "mmHg"
+                    unitCode = "mmHg"
+                    unitName = "Millimeter of Mercury"
                 } else {
                     print("Error: unknown unit type")
                 }
@@ -467,6 +483,7 @@ public class CapacitorHealthkitPlugin: CAPPlugin {
                 output.append([
                     "uuid": sample.uuid.uuidString,
                     "value": sample.quantity.doubleValue(for: unit!),
+                    "unit": unitCode!,
                     "unitName": unitName!,
                     "startDate": ISO8601DateFormatter().string(from: sample.startDate),
                     "endDate": ISO8601DateFormatter().string(from: sample.endDate),
